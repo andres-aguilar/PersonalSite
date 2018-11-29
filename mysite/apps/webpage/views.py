@@ -1,14 +1,20 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 
-from .models import MyProjects
+from .models import MyProjects, SocialMedia, Profile
 
 def under_construction(request):
     return render(request, 'under_construction.html')
 
 
 def index(request):
-    projects = MyProjects.objects.all()
+    projects = MyProjects.objects.all().order_by('-date')[:6]
+    social_medias = SocialMedia.objects.all()
+    user = Profile.objects.get(pk=1)
+
     context = {
-        'projects': projects
+        'projects': projects,
+        'social_medias': social_medias,
+        'user': user
     }
     return render(request, 'webpage/index.html', context)

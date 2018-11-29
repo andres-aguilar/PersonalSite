@@ -11,13 +11,9 @@ nav .brand-logo {
   color: #444;
 }
 
-p {
-  line-height: 2rem;
-}
+p { line-height: 2rem }
 
-.sidenav-trigger {
-  color: #26a69a;
-}
+.sidenav-trigger { color: #26a69a }
 
 .parallax-container {
   min-height: 380px;
@@ -25,9 +21,7 @@ p {
   height: auto;
   color: rgba(255,255,255,.9);
 }
-  .parallax-container .section {
-    width: 100%;
-  }
+.parallax-container .section { width: 100% }
 
 @media only screen and (max-width : 992px) {
   .parallax-container .section {
@@ -50,6 +44,12 @@ p {
 }
 .icon-block .material-icons {
   font-size: inherit;
+}
+
+p > i, a > i {
+  margin-right: 5px;
+  max-width: 15px;
+  min-width: 15px;
 }
 
 footer.page-footer {

@@ -1,12 +1,16 @@
-from django.db import models
+# -*- coding: utf-8 -*-
 
-# Create your models here.
+from django.db import models
+from django.contrib.auth.models import User
+
+
+
 class MyProjects(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     icon = models.CharField(max_length=25)
     url = models.URLField()
-    date = models.DateField(auto_now=True)
+    date = models.DateField()
 
     def __str__(self):
         return self.name
@@ -19,3 +23,13 @@ class SocialMedia(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField()
+    location = models.CharField(max_length=50)
+    short_bio = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.user.username
