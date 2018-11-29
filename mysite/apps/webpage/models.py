@@ -6,6 +6,7 @@ class MyProjects(models.Model):
     description = models.TextField()
     icon = models.CharField(max_length=25)
     url = models.URLField()
+    date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.name
