@@ -33,3 +33,24 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Schools(models.Model):
+    name = models.CharField(max_length=200)
+    degree = models.CharField(max_length=50)
+    carrer = models.CharField(max_length=50)
+    description = models.TextField()
+    start = models.DateField()
+    end = models.DateField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.degree
+
+
+class Technologies(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="static/techs")
+
+    def __str__(self):
+        return self.name
