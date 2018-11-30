@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
-{% block title %} Inicio {% endblock title %}
 {% load staticfiles %}
+{% block title %} Inicio {% endblock title %}
 {% block content %}
 
     <div id="index-banner" class="parallax-container">
@@ -10,7 +10,7 @@
             <br><br>
             <h1 class="header center teal-text text-lighten-2"> {{ user.user.get_full_name }} </h1>
             <div class="row center">
-              <h5 class="header col s12 light"> {{ user.short_bio }} </h5>
+              <h5 class="header col s12 white-text"> {{ user.short_bio }} </h5>
             </div>
             <br><br>
           </div>
@@ -124,7 +124,7 @@
         </div>
         <div class="footer-copyright">
           <div class="container">
-            <p> &copy; 2018 Andrés Aguilar</p>
+            <p class='center'> &copy; 2018 Andrés Aguilar</p>
           </div>
         </div>
       </footer>

@@ -7,10 +7,7 @@
  */
 
 nav ul a,
-nav .brand-logo {
-  color: #444;
-}
-
+nav .brand-logo { color: #444 }
 p { line-height: 2rem }
 
 .sidenav-trigger { color: #26a69a }
@@ -28,9 +25,13 @@ p { line-height: 2rem }
     position: absolute;
     top: 40%;
   }
-  #index-banner .section {
-    top: 10%;
+  .nav .brand-logo{
+    left: 41%;
+    font-size: 2rem;
+    -webkit-transform: translateX(-40%);
+    transform: translateX(-40%)
   }
+  #index-banner .section { top: 10% }
 }
 
 @media only screen and (max-width : 600px) {
