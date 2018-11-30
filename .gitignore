@@ -25,6 +25,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+mysite/static/techs/*
 eggs/
 .eggs/
 lib/
