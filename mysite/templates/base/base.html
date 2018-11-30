@@ -15,36 +15,37 @@
     <title> Andres Aguilar - {% block title %}{% endblock %} </title>
 </head>
 <body>
-    <nav class="white" role="navigation">
-		<div class="nav-wrapper container">
-			<a id="logo-container" href="{% url 'website:index' %}" class="brand-logo">Andrés Aguilar</a>
-			<ul class="right hide-on-med-and-down">
-				<li><a href="#projects">Projects</a></li>
-				<li><a href="#technologies">Technologies</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
+	<div class="navbar-fixed">
+		<nav class="teal lighten-2" role="navigation">
+			<div class="nav-wrapper container">
+				<a id="logo-container" href="{% url 'website:index' %}" class="brand-logo white-text">Andrés Aguilar</a>
+				<ul class="right hide-on-med-and-down">
+					<li><a class='white-text' href="{% url 'website:index' %}"><i class="material-icons left">home</i>Home</a></li>
+					<li><a class='white-text' href="{% url 'website:projects' %}"><i class="material-icons left">work</i>Projects</a></li>
+					<li><a class='white-text' href="{% url 'website:cv' %}"><i class="material-icons left">school</i>Mi CV</a></li>
+				</ul>
 
-			<ul id="nav-mobile" class="sidenav">
-				<li>
-					<div class="user-view">
-						<div class="background">
-							<img src="{% static 'images/background3.jpg' %}">
+				<ul id="nav-mobile" class="sidenav">
+					<li>
+						<div class="user-view">
+							<div class="background">
+								<img src="{% static 'images/background3.jpg' %}">
+							</div>
+							<a href="#user"><img class="circle" src="{% static 'images/photo.jpg' %}"></a>
+							<a href="#name"><span class="white-text name">Andrés Aguilar</span></a>
+							<a href="#email"><span class="white-text email">andresyoshimar@gmail.com</span></a>
 						</div>
-						<a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-						<a href="#name"><span class="white-text name">Andrés Aguilar</span></a>
-						<a href="#email"><span class="white-text email">andresyoshimar@gmail.com</span></a>
-					</div>
-				</li>
-				<li><a href="#projects">Projects</a></li>
-				<li><a href="#technologies">Technologies</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
-			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-		</div>
-  	</nav>
+					</li>
+					<li><a class='white-text' href="{% url 'website:index' %}"><i class="material-icons left">home</i>Home</a></li>
+					<li><a class='white-text' href="{% url 'website:projects' %}"><i class="material-icons left">work</i>Projects</a></li>
+					<li><a class='white-text' href="{% url 'website:cv' %}"><i class="material-icons left">school</i>Mi CV</a></li>
+				</ul>
+				<a href="#" data-target="nav-mobile" class="sidenav-trigger white-text"><i class="material-icons">menu</i></a>
+			</div>
+		</nav>
+	</div>
 
     {% block content %} {% endblock %}
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<script src="{% static 'scripts/main.js' %}"></script>

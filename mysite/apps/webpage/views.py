@@ -18,3 +18,11 @@ def index(request):
         'user': user
     }
     return render(request, 'webpage/index.html', context)
+
+
+def projects(request):
+    return render(request, 'webpage/projects.html')
+
+
+def curriculum(request):
+    return render(request, 'webpage/cv.html')
