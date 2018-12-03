@@ -51,8 +51,9 @@
         <div class="section no-pad-bot">
           <div class="container">
             <div class="row center">
-              <h5 class="header col s12 light">
-                La tecnología nos abre puertas
+              <h5 class="header col s12">
+                La tecnología es la herramienta con la cual, podemos obtener un alto impacto social 
+                y modificar nuestro entorno y oportunidades. La tecnología nos abre la puerta hacia un futuro mejor.
               </h5>
             </div>
           </div>
@@ -66,18 +67,25 @@
           <div class="row">
             <div class="col s12 center">
               <h3><i class="mdi-content-send brown-text"></i></h3>
-              <h4>Tecnologías</h4>
-              <p class="left-align light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. 
-                Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. 
-                Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. 
-                Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. 
-                Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. 
-                Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. 
-                Nullam eget dignissim mauris, non tristique erat. 
-                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae
-              </p>
+              <h4>Tecnologías con las que trabajo</h4>
             </div>
+
+            {% for technologie in technologies %}
+            <div class="col s12 m4 l3">
+              <div class="card medium">
+                <div class="card-image">
+                  <img src='/{{ technologie.image.url }}'/>
+                </div>
+                  <div class="card-content">
+                    <p>{{ technologie.description }}</p>
+                </div>
+                <div class="card-action">
+                  <a href="{{ technologie.url }}">{{ technologie.name }}</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
           </div>
     
         </div>
@@ -88,7 +96,7 @@
         <div class="section no-pad-bot">
           <div class="container">
             <div class="row center">
-              <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+              <h5 class="header col s12">A modern responsive front-end framework based on Material Design</h5>
             </div>
           </div>
         </div>
