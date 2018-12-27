@@ -8,7 +8,8 @@ def under_construction(request):
 
 
 def error_404(request):
-    return render(request, '404.html')
+    user = Profile.objects.get(pk=1)
+    return render(request, '404.html', {'user': user})
 
 
 def index(request):

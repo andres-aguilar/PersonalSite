@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Page not found</title>
-</head>
-<body>
-    <h1> This is not the web page you are looking for! </h1>
-</body>
-</html>
+{% extends 'base/base.html' %}
+
+{% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
+{% block keywords %} Not found, Python developer, Django developer, data engineer {% endblock keywords %}
+{% block title %} {{ user.user.get_full_name }} - Page not found {% endblock title %}
+
+{% block nav %} 
+  <li class="nav-item">
+    <a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Regresar al inicio</a>
+  </li>
+{% endblock nav %}
+
+{% block content %} 
+<div class="page-content"> 
+    <div>
+        <section class="profile-page">
+          <div class="wrapper">
+            <div class="page-header page-header-small">
+              <div class="container">
+                <div class="content-center">
+                  <h1> This is not the web page you are looking for! </h1>
+                  <a class='btn btn-primary' href="{% url 'website:index' %}"> Regresar al inicio </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}
+
+{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
