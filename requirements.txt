@@ -1,3 +1,6 @@
 Django==1.11.15
 flup==1.0.3.dev20110405
 Pillow==5.3.0
+html5lib==1.0.1
+beautifulsoup4==4.6.3
+django-htmlmin==0.10.0
