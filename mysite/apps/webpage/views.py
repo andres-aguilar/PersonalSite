@@ -7,6 +7,10 @@ def under_construction(request):
     return render(request, 'under_construction.html')
 
 
+def error_404(request):
+    return render(request, '404.html')
+
+
 def index(request):
     projects = MyProjects.objects.all().order_by('-date')[:6]
     social_medias = SocialMedia.objects.all()
