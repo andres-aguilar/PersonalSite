@@ -46,7 +46,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-HTML_MINIFY = True
+#HTML_MINIFY = True
 
 ROOT_URLCONF = 'mysite.urls'
 
