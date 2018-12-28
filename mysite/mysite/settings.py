@@ -28,8 +28,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Local apps
-    'apps.webpage',
-    'apps.blog'
+    'mysite.apps.webpage',
+    'mysite.apps.blog'
 )
 
 MIDDLEWARE_CLASSES = (
