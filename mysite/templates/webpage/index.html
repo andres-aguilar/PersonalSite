@@ -7,10 +7,10 @@
 
 {% block nav %} 
   <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">Acerca de mí</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="#skill">Habilidades</a></li>
   <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portafolio</a></li>
   <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experiencia</a></li>
   <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contacto</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
 {% endblock nav %}
 
 {% block content %}
@@ -268,7 +268,7 @@
       </div>
     </div>
 {% endblock content %}
-    
+
 {% block footerIcons %}
   {% for sm in social_medias %}
     <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>

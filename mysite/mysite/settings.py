@@ -27,10 +27,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd apps
+    'markdownx',
     # Local apps
     'mysite.apps.webpage',
     'mysite.apps.blog'
 )
+
+MARKDOWNX_MARKDOWNIFY_FUNCTION = 'markdownx.utils.markdownify'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

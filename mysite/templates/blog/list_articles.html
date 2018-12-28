@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+
+{% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
+{% block keywords %} Python blog, Django blog, blog de tecnología {% endblock keywords %}
+{% block title %} {{ user.user.get_full_name }} - {{ user.short_bio }} {% endblock title %}
+
+{% block nav %} 
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+{% endblock nav %}
+
+
+{% block content %}
+    <div class="page-content"> 
+        <section>
+            <div class="wrapper">
+                <div class="page-header page-header-tiny">
+                    <div class="container">
+                        <div class="content-center">
+                            <h1> Blog  </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="articles">
+            <div class="container"> 
+            {% for article in object_list %}
+            <a href="{% url 'blog:view' article.slug %}"> <h2> {{ article.title }} </h2> </a>
+                 <p> {{ article.pud_date }} </p>
+            {% endfor %}
+            {% if page_obj.has_previous or page_obj.has_next %}
+                <ul class="pager">
+                    <li>
+                        {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            {% endif %}
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+
+{% block footerIcons %}
+  {% for sm in social_medias %}
+    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
+  {% endfor %}
+{% endblock footerIcons %}
+
+{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
