@@ -19,14 +19,14 @@
                 <div class="page-header page-header-tiny">
                     <div class="container">
                         <div class="content-center">
-                            <h1> {{ object.title }}  </h1>
+                            <h1 class="h2 title"> {{ object.title }}  </h1>
                             <p> {{ object.pub_date }} </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="articles">
+        <section class='section'>
             <div class="container"> 
                 {{ object.formatted_markdown|safe }}
             </div>

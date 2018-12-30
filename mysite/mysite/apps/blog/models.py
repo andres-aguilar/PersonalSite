@@ -26,6 +26,10 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-pub_date']
+
+
     @property
     def formatted_markdown(self):
         return markdownify(self.content)
