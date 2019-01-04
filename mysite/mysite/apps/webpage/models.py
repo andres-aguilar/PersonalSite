@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.utils.text import slugify
+from markdownx.utils import markdownify
+from markdownx.models import MarkdownxField
 from django.contrib.auth.models import User
 
 
@@ -14,12 +16,14 @@ class ProjectClasses(models.Model):
 
 class MyProjects(models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField()
+    short_description = models.CharField(max_length=300)
+    technologies = models.CharField(max_length=300)
+    description = MarkdownxField()
     icon = models.CharField(max_length=25)
     image = models.ImageField(upload_to="static/projects")
     url = models.URLField()
     date = models.DateField()
-    slug = models.SlugField()
+    slug = models.SlugField(default='', blank=True)
     project_type = models.ForeignKey(ProjectClasses, on_delete=models.CASCADE)
 
 
@@ -31,6 +35,10 @@ class MyProjects(models.Model):
             self.slug = slugify(self.title)
 
         super(MyProjects, self).save(*args, **kwargs)
+    
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.description)
 
 
 class SocialMedia(models.Model):
