@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 
@@ -18,11 +19,18 @@ class MyProjects(models.Model):
     image = models.ImageField(upload_to="static/projects")
     url = models.URLField()
     date = models.DateField()
+    slug = models.SlugField()
     project_type = models.ForeignKey(ProjectClasses, on_delete=models.CASCADE)
 
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.title)
+
+        super(MyProjects, self).save(*args, **kwargs)
 
 
 class SocialMedia(models.Model):
