@@ -21,7 +21,7 @@ class MyProjects(models.Model):
     description = MarkdownxField()
     icon = models.CharField(max_length=25)
     image = models.ImageField(upload_to="static/projects")
-    url = models.URLField()
+    url = models.URLField(blank=True)
     date = models.DateField()
     slug = models.SlugField(default='', blank=True)
     project_type = models.ForeignKey(ProjectClasses, on_delete=models.CASCADE)
@@ -32,7 +32,7 @@ class MyProjects(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.name)
 
         super(MyProjects, self).save(*args, **kwargs)
     
