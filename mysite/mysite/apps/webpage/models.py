@@ -10,6 +10,9 @@ from django.contrib.auth.models import User
 class ProjectClasses(models.Model):
     name = models.CharField(max_length=50)
 
+    class Meta:
+        verbose_name_plural = 'Project classes'
+
     def __str__(self):
         return self.name
 
@@ -26,6 +29,9 @@ class MyProjects(models.Model):
     slug = models.SlugField(default='', blank=True)
     project_type = models.ForeignKey(ProjectClasses, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Project'
+        verbose_name_plural = 'Projects'
 
     def __str__(self):
         return self.name
@@ -71,6 +77,9 @@ class Schools(models.Model):
     end = models.DateField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = 'Schools'
+
     def __str__(self):
         return self.degree
 
@@ -92,6 +101,9 @@ class Technologies(models.Model):
     description = models.CharField(max_length=250)
     url = models.URLField()
     percentage = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = 'Technologies'
 
     def __str__(self):
         return self.name
