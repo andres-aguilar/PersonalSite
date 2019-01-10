@@ -35,7 +35,9 @@
                   <div class="card-body">
                     <a href="{% url 'blog:view' article.slug %}"> <h2 class="h3 title"> {{ article.title }} </h2> </a>
                     <p class='h6 text-muted'> {{ article.pub_date }} </p>
-                    <p> {{ article.formatted_markdown | safe | truncatechars_html:500 }} </p>
+                    <div> 
+                        {{ article.formatted_markdown | safe | truncatechars_html:500 }} 
+                    </div>
                   </div>
                 </div>
             </article>
