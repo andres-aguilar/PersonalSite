@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+{% block title %} Andrés Aguilar - Crear post {% endblock title %}
+
+{% block nav %} 
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'dashboard:index' %}">Dashboard</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'logout' %}">Salir</a></li>
+{% endblock nav %}
+
+{% block content %}
+    <div class="page-content"> 
+        <section>
+            <div class="wrapper">
+                <div class="page-header page-header-tiny">
+                <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
+                    <div class="container">
+                        <div class="content-center">
+                            <h1 class="h2 title"> Redactar nueva publicación en el blog  </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='section'>
+            <div class="container"> 
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-12 col-md-8 col-md-offset-2">
+                        <form class="form" method="post">
+                            {% csrf_token %}
+                            {% if form.non_field_errors %}
+                            <div class='alert alert-danger'> {{ form.non_field_errors }} </div>
+                            {% endif %}
+
+                            <div class="form-group">
+                                {{ form.title.label_tag }}
+                                {{ form.title }}
+                            </div>
+
+                            <div class='row'>
+                                <div class="col-sm-12 col-md-6 form-group">
+                                    {{ form.labels.label_tag }}
+                                    {{ form.labels }}
+                                </div>
+                                <div class="col-sm-12 col-md-6 form-group">
+                                    {{ form.author.label_tag }}
+                                    {{ form.author }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class='col-sm-12 col-md-6 form-group'>
+                                    {{ form.pub_date.label_tag }}
+                                    {{ form.pub_date }}
+                                </div>
+                                <div class='col-sm-12 col-md-6 form-group'>
+                                    {{ form.category.label_tag }}
+                                    {{ form.category }}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                {{ form.content.label_tag }}
+                                {{ form.content }}
+                            </div>
+    
+                            <div class="row justify-content-sm-center">
+                                <div class="col-sm-auto">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ form.media }}
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+
+{% block footerIcons %}
+  {% for sm in social_medias %}
+    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
+  {% endfor %}
+{% endblock footerIcons %}
+
+{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
