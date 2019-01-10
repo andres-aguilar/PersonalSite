@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+
+{% load staticfiles %}
+{% block keywords %} Andrés Aguilar, Login {% endblock keywords %}
+{% block title %} Andrés Aguilar - Login {% endblock title %}
+
+{% block nav %} 
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+{% endblock nav %}
+
+{% block content %}
+    <div class="page-content"> 
+        <section>
+            <div class="wrapper">
+                <div class="page-header page-header-tiny">
+                <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
+                    <div class="container">
+                        <div class="content-center">
+                            <h1 class="h2 title"> Bienvenido al formulario de acceso  </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class='section'>
+            <div class="container"> 
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-12 col-md-8 col-md-offset-2">
+                        {% if form.errors %}
+                        <p class='font-weight-bold text-danger text-center'> Usuario o contraeña incorrectos! </p>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+        
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="username">Usuario</label>
+                                        <input class="form-control" type="text" name='username'>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="username">Contraseña</label>
+                                        <input class="form-control" type="password" name='password'>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="row justify-content-sm-center">
+                                <div class="col-sm-auto">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Entrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+
+{% block footerCopy %} Andrés Aguilar {% endblock footerCopy %}
