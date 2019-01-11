@@ -3,7 +3,7 @@
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
 {% block keywords %} Andrés Aguilar, {{ object.technologies }} {% endblock keywords %}
-{% block title %} {{ user.user.get_full_name }} - {{ object.name }} {% endblock title %}
+{% block title %} {{ object.name }} {% endblock title %}
 
 {% block nav %} 
   <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
