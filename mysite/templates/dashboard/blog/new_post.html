@@ -1,12 +1,12 @@
 {% extends 'base/base.html' %}
 
 {% load staticfiles %}
-{% block keywords %} Andrés Aguilar, Login {% endblock keywords %}
-{% block title %} Andrés Aguilar - Login {% endblock title %}
+{% block title %} Andrés Aguilar - Crear post {% endblock title %}
 
 {% block nav %} 
   <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
   <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'dashboard:index' %}">Dashboard</a></li>
   <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'logout' %}">Salir</a></li>
 {% endblock nav %}
 
@@ -18,7 +18,7 @@
                 <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
                     <div class="container">
                         <div class="content-center">
-                            <h1 class="h2 title"> Bienvenido al panel de administración  </h1>
+                            <h1 class="h2 title"> Redactar nueva publicación en el blog  </h1>
                         </div>
                     </div>
                 </div>
@@ -27,17 +27,11 @@
         <section class='section'>
             <div class="container"> 
                 <div class="row justify-content-sm-center">
-
                     <div class="col-sm-12 col-md-8 col-md-offset-2">
-                        <a href="{% url 'dashboard:new_post' %}"> Crear nueva publicación en el blog </a>
+                        
+                        {% include 'includes/post_form.html' with form=form %}
+
                     </div>
-
-                    {% if request.user.is_authenticated %}
-                        <p>Welcome, {{ request.user.get_username }}. Thanks for logging in.</p>
-                    {% else %}
-                        <p>Welcome, new user. Please log in.</p>
-                    {% endif %}
-
                 </div>
             </div>
         </section>
@@ -45,4 +39,10 @@
 {% endblock content %}
 
 
-{% block footerCopy %} Andrés Aguilar {% endblock footerCopy %}
+{% block footerIcons %}
+  {% for sm in social_medias %}
+    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
+  {% endfor %}
+{% endblock footerIcons %}
+
+{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
