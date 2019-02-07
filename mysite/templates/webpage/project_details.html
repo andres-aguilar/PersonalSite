@@ -1,0 +1,58 @@
+{% extends 'base/layout.html' %}
+{% load staticfiles %}
+
+{% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
+{% block title %} {{ object.name }} {% endblock title %}
+
+{% block nav %}
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+    <a href="#" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
+{% endblock nav %}
+
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> {{ object.name }} </h1>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> {{ object.project_type.name }} </h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="columns is-centered mt-3">
+        <div class="column is-four-fifths">
+            <div class="columns">
+                <div class="column has-maxwidth-350">
+                    <div class="card">
+
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img 
+                                    src="/{{ object.image.url }}" 
+                                    alt="image for project {{ object.name }}">
+                            </figure>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="content">
+                                <p> Fecha: <span class="has-text-link">{{ object.date }}</span>  </p>
+                                <p> Tipo de proyecto: <span class="has-text-link">{{ object.project_type.name }}</span> </p>
+                                <p> Tecnologías usadas: <span class="has-text-link">{{ object.technologies }}</span> </p>
+                                <p> URL: <span> <a href="{{ object.url }}">{{ object.url }}</a> </span> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column"> {{ object.formatted_markdown|safe  }} </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

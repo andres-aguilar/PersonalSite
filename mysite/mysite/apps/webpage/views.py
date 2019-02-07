@@ -35,7 +35,7 @@ def index(request):
 
 class Project(DetailView):
     model = MyProjects
-    template_name = 'webpage/project.html'
+    template_name = 'webpage/project_details.html'
 
     def get_context_data(self, **kwargs):
         context = super(Project, self).get_context_data(**kwargs)
