@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from .models import MyProjects, SocialMedia, Profile, Technologies, Schools, Work
 
 def under_construction(request):
@@ -31,6 +31,17 @@ def index(request):
     }
 
     return render(request, 'webpage/index.html', context)
+
+
+class ProjectList(ListView):
+    model = MyProjects
+    template_name = "webpage/project_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectList, self).get_context_data(**kwargs)
+        context["user"] = Profile.objects.get(pk=1)
+        context["social_medias"] = SocialMedia.objects.all()
+        return context
 
 
 class Project(DetailView):

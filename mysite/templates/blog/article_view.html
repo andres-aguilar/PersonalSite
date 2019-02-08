@@ -2,11 +2,11 @@
 {% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block title %} Mi blog personal {% endblock title %}
+{% block title %} {{ object.title }} {% endblock title %}
 
 {% block nav %}
     <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
-    <a href="#" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
     <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
     <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase is-active"> Blog </a>
 {% endblock nav %}

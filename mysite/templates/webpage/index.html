@@ -6,7 +6,7 @@
 
 {% block nav %}
     <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase is-active"> Acerca de mí </a>
-    <a href="#" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
     <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
     <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
 {% endblock nav %}
@@ -125,7 +125,7 @@
             </div>
             <div class="level mt--3">
                 <div class="level-item">
-                    <a href="#">Ver portafolio completo</a>
+                    <a href="{% url 'website:projects' %}">Ver portafolio completo</a>
                 </div>
             </div>
             <div class="container columns is-multiline">
@@ -133,7 +133,7 @@
                 <div class="column is-one-quarter">
                     <div class="card ">
                         <div class="card-image">
-                            <a href="{% url 'website:project' project.slug %}">
+                            <a href="{% url 'website:project_details' project.slug %}">
                                 <figure class="image is-4by3">
                                     <img class="image-medium" src="/{{ project.image.url }}" alt="{{ project.name }}">
                                 </figure>
