@@ -1,75 +1,66 @@
-{% extends 'base/base.html' %}
-
+{% extends 'base/layout.html' %}
 {% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block keywords %} Python blog, Django blog, blog de tecnología {% endblock keywords %}
 {% block title %} Mi blog personal {% endblock title %}
 
-{% block nav %} 
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+{% block nav %}
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+    <a href="#" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase is-active"> Blog </a>
 {% endblock nav %}
 
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> Blog </h1>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> Mi blog personal </h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
-    <div class="page-content"> 
-        <section>
-            <div class="wrapper">
-                <div class="page-header page-header-tiny">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
-                    <div class="container">
-                        <div class="content-center">
-                            <h1 class="h2 title"> Blog  </h1>
+    <section class="container">
+        <div class="columns is-multiline is-centered mt-5">
+
+            {% for article in object_list %}
+            <div class="column is-four-fifths mt-3">
+                <a href="{% url 'blog:view' article.slug %}" class="has-text-justified has-text-black">
+                    <div class="columns">
+                        <div class="column has-background-link has-maxwidth-350 has-text-centered">
+                            <p class="is-size-3 is-uppercase has-text-white"> {{ article.title }} </p>
+                            <p class="is-size-6 has-text-weight-light has-text-grey-light"> {{ article.pub_date }} </p>
+                        </div>
+                        <div class="column">
+                            <p class="has-text-justified has-text-black"> 
+                                {{ article.formatted_markdown | safe | truncatechars_html:500 }} 
+                            </p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-        </section>
-
-        <section class='section' id="articles">
-            <div class="container"> 
-            {% for article in object_list %}
-            <article class="row">
-                <div class="col-lg-12 col-md-12">
-                  <div class="card-body">
-                    <a href="{% url 'blog:view' article.slug %}"> <h2 class="h3 title"> {{ article.title }} </h2> </a>
-                    <p class='h6 text-muted'> {{ article.pub_date }} </p>
-                    <div> 
-                        {{ article.formatted_markdown | safe | truncatechars_html:500 }} 
-                    </div>
-                  </div>
-                </div>
-            </article>
             {% endfor %}
 
-            {% if page_obj.has_previous or page_obj.has_next %}
-                <div class="row justify-content-sm-center">
-                    <div class='col-sm-auto'>
-                        {% if page_obj.has_previous %}
-                        <a class='btn btn-primary' href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-                        {% else %}
-                        <a class='btn btn-disabled disabled' href="">Anterior</a>
-                        {% endif %}
+        </div>
 
-                        {% if page_obj.has_next %}
-                        <a class='btn btn-primary' href="?page={{ page_obj.next_page_number }}">Siguiente</a>
-                        {% else %}
-                        <a class='btn btn-disabled disabled' href="">Siguiente</a>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endif %}
-            </div>
-        </section>
-    </div>
-{% endblock content %}
-
-
-{% block footerIcons %}
-  {% for sm in social_medias %}
-    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
-  {% endfor %}
-{% endblock footerIcons %}
-
-{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
+        {% if page_obj.has_previous or page_obj.has_next %}
+        <nav class="pagination is-centered is-rounded mt-3" role="navigation" aria-label="pagination">
+            <ul class="pagination-list">
+                {% if page_obj.has_previous %}
+                <li><a class="pagination-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li><a class="pagination-link" href="?page={{ page_obj.next_page_number }}">Next page</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </section>
+{% endblock %}
