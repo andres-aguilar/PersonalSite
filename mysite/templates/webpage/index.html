@@ -1,278 +1,253 @@
-{% extends 'base/base.html' %}
+{% extends 'base/layout.html' %}
 {% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block keywords %} Python developer, Django developer, data engineer {% endblock keywords %}
 {% block title %} {{ user.user.get_full_name }} - {{ user.short_bio }} {% endblock title %}
 
-{% block nav %} 
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">Acerca de mí</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="#portfolio">Portafolio</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="#experience">Experiencia</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="#contact">Contacto</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+{% block nav %}
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase is-active"> Acerca de mí </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
 {% endblock nav %}
 
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <figure class="image">
+                    <img class="is-rounded" src="{% static 'images/photo.jpg' %}" alt="Avatar">
+                </figure>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> {{ user.user.get_full_name }} </h1>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> {{ user.short_bio }} </h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <div class="page-content">
-      <div>
-        <section class="profile-page">
-          <div class="wrapper">
-            <div class="page-header page-header-small" filter-color="green">
-              <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
-              <div class="container">
-                <div class="content-center">
-                  <div class="cc-profile-image"><a href="#"><img src="{% static 'images/photo.jpg' %}" alt="Image"/></a></div>
-                  <h1 class="h2 title">{{ user.user.get_full_name }}</h1>
-                  <p class="category text-white">{{ user.short_bio }}</p>
+    <section class="container">
+        <div id="main-social-media">
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    {% for sc in social_medias %}
+                    <a  href="{{ sc.url }}" 
+                        target="_blank"
+                        class="button is-rounded has-background-grey-light has-text-white"
+                    >
+                        <i class="{{ sc.icon }}"></i>
+                    </a>
+                    {% endfor %}
                 </div>
-              </div>
-              <div class="section">
-                <div class="container">
-                  <div class="button-container">
-                  {% for sc in social_medias %}
-                    <a class="btn btn-default btn-round btn-lg btn-icon" 
-                      href="{{ sc.url }}" rel="tooltip" 
-                      title="Follow me on {{ sc.name }}" target="_blank"><i class="{{ sc.icon }}"></i></a>
-                  {% endfor %}
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
+        </div>
 
-        <section class="section" id="about">
-          <div class="container">
-            <div class="card" data-aos="fade-up" data-aos-offset="10">
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <div class="card-body">
-                    <h2 class="h4 mt-0 title">Acerca de mí</h2>
-                    <p class="text-justify"> {{ user.bio }} </p>
-                  </div>
+        <article id="about-me" class="mt-3">
+            <div class="card card-shadowed">
+                <div class="card-content">
+                    <div class="columns">
+                        <div class="column">
+                            <h3 class="has-text-weight-bold is-size-4"> Acerca de mí </h3>
+                            <p class="has-text-justified"> {{ user.bio }} </p>
+                        </div>
+                        <div class="column">
+                            <h3 class="has-text-weight-bold is-size-4"> Információn básica </h3>
+
+                            <div class="columns">
+                                <div class="column"> <p class="is-uppercase has-text-weight-semibold"> Edad: </p> </div>
+                                <div class="column"><p> {{ user.age }} </p></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column"> <p class="is-uppercase has-text-weight-semibold"> Email: </p> </div>
+                                <div class="column"><p> {{ user.user.email }} </p></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column"> <p class="is-uppercase has-text-weight-semibold"> Ubicación: </p> </div>
+                                <div class="column"><p> {{ user.location }} </p></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column"> <p class="is-uppercase has-text-weight-semibold"> Idiomas: </p> </div>
+                                <div class="column"><p> {{ user.languages }} </p></div>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="card-body">
-                    <h3 class="h4 mt-0 title">Información básica</h3>
-                    <div class="row">
-                      <div class="col-sm-4"><strong class="text-uppercase">Edad:</strong></div>
-                      <div class="col-sm-8"> {{ user.age }} </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
-                      <div class="col-sm-8"> {{ user.user.email }} </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">Ubicación:</strong></div>
-                      <div class="col-sm-8"> {{ user.location }} </div>
-                    </div>
-                    <div class="row mt-3">
-                      <div class="col-sm-4"><strong class="text-uppercase">Idiomas:</strong></div>
-                      <div class="col-sm-8"> {{ user.languages }} </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
+        </article>
 
-        <section class="section" id="skill">
-          <div class="container">
-            <h2 class="h4 text-center mb-4 title">Habilidades</h2>
-            <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-              <div class="card-body">
-
-                <div class="row">
-                {% for tech in technologies %}
-                  <div class="col-md-6">
-                    <div class="progress-container progress-primary"><span class="progress-badge"> {{ forloop.counter }}.- {{ tech.name }}</span>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-primary" data-aos="progress-full" 
-                          data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="{{ tech.percentage }}" aria-valuemin="0" 
-                          aria-valuemax="100" style="width: {{ tech.percentage }}%;"></div><span class="progress-value">{{ tech.percentage }}%</span>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
+        <article id="skils" class="mt-5">
+            <div class="level">
+                <div class="level-item">
+                    <h3 class="has-text-weight-bold is-size-4">Habilidades</h3>
                 </div>
-
-              </div>
             </div>
-          </div>
-        </section>
-
-        <section class="section" id="portfolio">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 ml-auto mr-auto">
-                <h2 class="h4 text-center mb-4 title">Portafolio</h2>
-                <div class="nav-align-center">
-                  <ul class="nav nav-pills nav-pills-primary" role="tablist">
-                    <li class="nav-item">
-                    <!-- <a class="nav-link active" data-toggle="tab" href="#web-development" role="tablist"><i class="fa fa-laptop" aria-hidden="true"></i></a> -->
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="tab-content gallery mt-5">
-              <div class="tab-pane active" id="web-development">
-                <div class="ml-auto mr-auto">
-                  <div class="row">
-
-                    {% for project in projects %}
-                    <div class="col-md-6">
-                      <div class="cc-porfolio-image img-raised" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                        <a href="{% url 'website:project' project.slug %}">
-                          <figure class="cc-effect"><img src="/{{ project.image.url }}" alt="Image"/>
-                            <figcaption>
-                              <div class="h4">{{ project.name }}</div>
-                              <p>{{ project.short_description }}</p>
-                              <p class="font-weight-light" > {{ project.project_type }} </p>
-                            </figcaption>
-                          </figure>
-                        </a>
-                      </div>
+            <div class="card mt-3 card-shadowed">
+                <div class="card-content columns is-multiline has-text-info">
+                    {% for tech in technologies %}
+                    <div class="column is-half">
+                        <div class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <p class="is-uppercase has-text-weight-light">
+                                        {{ forloop.counter }}.- {{ tech.name }}
+                                        <span class="is-hidden-desktop"> {{ tech.percentage }}% </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="level-right is-hidden-mobile">
+                                <div class="level-item">
+                                    <p>{{ tech.percentage }}%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <progress class="progress is-link is-small" value="{{ tech.percentage }}" max="100"></progress>
                     </div>
                     {% endfor %}
-                    
-                  </div>
                 </div>
-              </div>
-
             </div>
-          </div>
-        </section>
+        </article>
 
-        <section class="section" id="experience">
-          <div class="container cc-experience">
-            <h2 class="h4 text-center mb-4 title">Experiencia laboral</h2>
+        <article id="portafolio" class="mt-5">
+            <div class="level">
+                <div class="level-item">
+                    <h3 class="has-text-weight-bold is-size-4">Portafolio</h3>
+                </div>
+            </div>
+            <div class="level mt--3">
+                <div class="level-item">
+                    <a href="{% url 'website:projects' %}">Ver portafolio completo</a>
+                </div>
+            </div>
+            <div class="container columns is-multiline">
+                {% for project in projects %}
+                <div class="column is-one-quarter">
+                    <div class="card ">
+                        <div class="card-image">
+                            <a href="{% url 'website:project_details' project.slug %}">
+                                <figure class="image is-4by3">
+                                    <img class="image-medium" src="/{{ project.image.url }}" alt="{{ project.name }}">
+                                </figure>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </article>
+
+        <article id="experiencia" class="mt-5">
+            <div class="level">
+                <div class="level-item">
+                    <h3 class="has-text-weight-bold is-size-4">Experiencia</h3>
+                </div>
+            </div>
 
             {% for work in works %}
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body cc-experience-header">
-                    <p> {{ work.start| date:'m/Y' }} - {{ work.end| date:'m/Y' }} </p>
-                    <div class="h5"> {{ work.name }} </div>
-                  </div>
+            <div class="columns is-multiline is-centered mt-3">
+                <div class="column is-full mt-3 card-has-radious has-minishadow">
+                    <div class="columns">
+                        <div class="column has-background-link has-maxwidth-350 has-text-centered">
+                            <p class="is-size-3 is-uppercase has-text-white"> {{ work.name }} </p>
+                            <p class="is-size-6 has-text-weight-light has-text-grey-light"> {{ work.start| date:'m/Y' }} - {{ work.end| date:'m/Y' }} </p>
+                        </div>
+                        <div class="column">
+                            <div class="is-size-5"> {{work.position}} </div>
+                            <p class="has-text-justified has-text-black mt-3"> {{ work.description }} </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body">
-                    <div class="h5"> {{work.position}} </div>
-                    <p class="text-justify"> {{ work.description }} </p>
-                  </div>
-                </div>
-              </div>
             </div>
             {% endfor %}
 
-          </div>
-        </section>
+        </article>
 
-        <section class="section">
-          <div class="container cc-education">
-            <h2 class="h4 text-center mb-4 title">Educación</h2>
+        <article id="educacion" class="mt-5">
+            <div class="level">
+                <div class="level-item">
+                    <h3 class="has-text-weight-bold is-size-4">Educación</h3>
+                </div>
+            </div>
 
             {% for school in schools %}
-            <div class="card">
-              <div class="row">
-                <div class="col-md-3 bg-primary" data-aos="fade-right" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body cc-education-header">
-                    <p> {{ school.start| date:'m/Y' }} - {{ school.end| date:'m/Y' }} </p>
-                    <div class="h5"> {{ school.degree }} </div>
-                  </div>
+            <div class="columns is-multiline is-centered mt-3">
+                <div class="column is-full mt-3 card-has-radious has-minishadow">
+                    <div class="columns">
+                        <div class="column has-background-link has-maxwidth-350 has-text-centered">
+                            <p class="is-size-3 is-uppercase has-text-white"> {{ school.degree }} </p>
+                            <p class="is-size-6 has-text-weight-light has-text-grey-light"> {{ school.start| date:'m/Y' }} - {{ school.end| date:'m/Y' }} </p>
+                        </div>
+                        <div class="column">
+                            <div class="is-size-5"> {{ school.carrer }} </div>
+                            <p class="is-size-6 has-text-weight-light has-text-grey-light"> {{ school.name }} </p>
+                            <p class="has-text-justified has-text-black mt-3"> {{ school.description }} </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-9" data-aos="fade-left" data-aos-offset="50" data-aos-duration="500">
-                  <div class="card-body">
-                    <div class="h5"> {{ school.carrer }} </div>
-                    <p class="category"> {{ school.name }} </p>
-                    <p class="text-justify"> {{ school.description }} </p>
-                  </div>
-                </div>
-              </div>
             </div>
             {% endfor %}
 
-          </div>
-        </section>
+        </article>
 
-        <section class="section" id="contact">
-          <div class="cc-contact-information" style="background-image: url('{% static 'images/staticmap.png' %}');">
-            <div class="container">
-              <div class="cc-contact">
-                <div class="row">
-                  <div class="col-md-9">
-                    <div class="card mb-0" data-aos="zoom-in">
-                      <h2 class="h4 text-center title"> Contacto </h2>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="card-body">
-                            <form action="https://formspree.io/{{ user.user.email }}" method="POST">
-                              <div class="p pb-3"><strong> Sientase libre de contactarme </strong></div>
-                              <div class="row mb-3">
-                                <div class="col">
-                                  <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-circle"></i></span>
-                                    <input class="form-control" type="text" name="name" placeholder="Nombre" required="required"/>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row mb-3">
-                                <div class="col">
-                                  <div class="input-group"><span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                                    <input class="form-control" type="text" name="Subject" placeholder="Proyecto" required="required"/>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row mb-3">
-                                <div class="col">
-                                  <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                    <input class="form-control" type="email" name="_replyto" placeholder="E-mail" required="required"/>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row mb-3">
-                                <div class="col">
-                                  <div class="form-group">
-                                    <textarea class="form-control" name="message" placeholder="Comentario" required="required"></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <button class="btn btn-primary" type="submit">Enviar</button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
+    </section>
+
+    <article id="contacto" class="mt-5">
+        <section class="hero is-dark is-medium">
+            <div class="hero-body columns is-vcentered is-centered">
+                <div class="column is-half">
+                    <form class="card card-has-radious is-centered p-3 card-shadowed" action="https://formspree.io/{{ user.user.email }}" method="POST">
+                        <div class="field is-grouped is-grouped-centered">
+                            <div class="control">
+                                <h3 class="has-text-weight-bold is-size-4">Contacto</h3>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="card-body">
-                            <p class="mb-0"><strong>Ubicación </strong></p>
-                            <p class="pb-2"> {{ user.location }} </p>
-                            <p class="mb-0"><strong>Email</strong></p>
-                            <p> {{ user.user.email }} </p>
-                          </div>
+                        <div class="field">
+                            <label class="has-text-weight-semibold">Sientase libre de contactarme</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-rounded" type="text" placeholder="Nombre" required>
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-user"></i>
+                                </span>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-rounded" type="text" placeholder="Email" required>
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-rounded" type="text" placeholder="Proyecto/Empresa" required>
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-file-text"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                            <textarea class="textarea" placeholder="Comentario" required></textarea>
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-centered">
+                            <div class="control">
+                                <button class="button is-info is-medium is-outlined" type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
-          </div>
         </section>
-
-      </div>
-    </div>
-{% endblock content %}
-
-{% block footerIcons %}
-  {% for sm in social_medias %}
-    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
-  {% endfor %}
-{% endblock footerIcons %}
-
-{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
+    </article>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- SEO metatags -->
+    <meta name='author' content='{{ user.user.get_full_name }}' />
+    <meta name='owner' content='{{ user.user.get_full_name }}'/>
+    <meta name="description" content=" {% block description %} {% endblock description %} "/>
+    <meta name='robots' content='index,follow'/>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/bulma.min.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <!-- Title -->
+    <title> {% block title %} {% endblock title %} </title>
+</head>
+
+<body>
+    <header class="hero is-dark is-medium">
+        <!-- Hero head: will stick at the top -->
+        <div class="hero-head">
+            <nav class="navbar is-fixed-top has-background-grey-darker">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <a href="{% url 'website:index' %}" class="navbar-item">
+                            <p class="subtitle"> {{ user.user.get_full_name }} </p>
+                        </a>
+                        <span 
+                            class="navbar-burger burger has-text-white" 
+                            data-target="navbarMenuHeroA" >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            {% block nav %} {% endblock nav %}
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        {% block header %} {% endblock %}
+        
+    </header>
+
+    {% block content %} {% endblock content %}
+
+    <footer class="footer mt-3 pb-2">
+        <div id="main-social-media">
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    {% for sm in social_medias %}
+                    <a href="{{ sm.url }}" class="ml-3 has-text-dark is-size-5"><i class="{{ sm.icon }}"></i></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="content has-text-centered mt-3">
+            <p>
+                &copy; 2018-2019<strong> {{ user.user.get_full_name }} </strong> All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+<script src="{% static 'script/main.js' %}"></script>
+</html>

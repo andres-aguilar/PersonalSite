@@ -1,48 +1,48 @@
-{% extends 'base/base.html' %}
-
+{% extends 'base/layout.html' %}
 {% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block keywords %} {{ object.labels }} {% endblock keywords %}
 {% block title %} {{ object.title }} {% endblock title %}
 
-{% block nav %} 
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+{% block nav %}
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase is-active"> Blog </a>
 {% endblock nav %}
 
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> {{ object.title }} </h1>
+            </div>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> {{ object.pub_date }} </h2>
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+            <div class="level">
+                <div class="level-item has-text-centered">
+                        <a href="{% url 'dashboard:edit_post' object.slug %}"> Editar artículo </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
 
 {% block content %}
-    <div class="page-content"> 
-        <section>
-            <div class="wrapper">
-                <div class="page-header page-header-tiny">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
-                    <div class="container">
-                        <div class="content-center">
-                            <h1 class="h2 title"> {{ object.title }}  </h1>
-                            <p> {{ object.pub_date }} </p>
-                            {% if request.user.is_authenticated %}
-                            <a href="{% url 'dashboard:edit_post' object.slug %}"> Editar artículo </a>
-                            {% endif %}
-                        </div>
+    <section class="container">
+        <div class="columns is-centered mt-5">
+            <div class="column is-four-fifths">
+                <div class="columns">
+                    <div class="column">
+                        {{ object.formatted_markdown|safe }}
                     </div>
                 </div>
             </div>
-        </section>
-        <section class='section'>
-            <div class="container"> 
-                {{ object.formatted_markdown|safe }}
-            </div>
-        </section>
-    </div>
-{% endblock content %}
-
-
-{% block footerIcons %}
-  {% for sm in social_medias %}
-    <a class="cc-facebook btn btn-link" href="{{ sm.url }}"><i class="{{ sm.icon }} fa-2x " aria-hidden="true"></i></a>
-  {% endfor %}
-{% endblock footerIcons %}
-
-{% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}
+        </div>
+    </section>
+{% endblock %}
