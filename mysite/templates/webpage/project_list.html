@@ -30,7 +30,7 @@
     <section class="container">
         <div class="columns is-multiline is-centered mt-3">
 
-            {% for project in object_list %}
+            {% for project in project_list %}
             <div class="column is-four-fifths">
                 <div class="columns">
                     <div class="column has-maxwidth-350">
@@ -49,9 +49,9 @@
                     <div class="column">
                         <p class="title"> {{ project.name }} </p>
                         <p class="is-size-6 has-text-weight-light"> {{ project.project_type.name }} </p>
-                        <p class="has-text-justified"> 
+                        <div class="has-text-justified"> 
                             {{ project.formatted_markdown|safe | truncatechars_html:400 }}
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

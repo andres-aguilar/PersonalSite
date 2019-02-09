@@ -30,7 +30,7 @@
     <section class="container">
         <div class="columns is-multiline is-centered mt-5">
 
-            {% for article in object_list %}
+            {% for article in article_list %}
             <div class="column is-four-fifths mt-3">
                 <a href="{% url 'blog:view' article.slug %}" class="has-text-justified has-text-black">
                     <div class="columns">

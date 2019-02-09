@@ -1,71 +1,67 @@
-{% extends 'base/base.html' %}
+{% extends 'base/layout.html' %}
 
 {% load staticfiles %}
-{% block keywords %} Andrés Aguilar, Login {% endblock keywords %}
-{% block title %} Andrés Aguilar - Login {% endblock title %}
+{% block title %} Login {% endblock title %}
 
 {% block nav %} 
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
 {% endblock nav %}
 
-{% block content %}
-    <div class="page-content"> 
-        <section>
-            <div class="wrapper">
-                <div class="page-header page-header-tiny">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('{% static 'images/background1.jpg' %}');"></div>
-                    <div class="container">
-                        <div class="content-center">
-                            <h1 class="h2 title"> Bienvenido al formulario de acceso  </h1>
-                        </div>
-                    </div>
-                </div>
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> Panel de administración </h1>
             </div>
-        </section>
-        <section class='section'>
-            <div class="container"> 
-                <div class="row justify-content-sm-center">
-                    <div class="col-sm-12 col-md-8 col-md-offset-2">
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> Inicio de sesión </h2>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <div class="columns is-multiline is-centered mt-3">
+            <div class="column is-four-fifths">
+                <div class="columns">
+                    <div class="column">
                         {% if form.errors %}
-                        <p class='font-weight-bold text-danger text-center'> Usuario o contraeña incorrectos! </p>
+                        <p class="notification is-danger"> Usuario o contraeña incorrectos! </p>
                         {% endif %}
-                        <form method="post">
+                        <form method="post" class="card card-has-radious is-centered p-5 card-shadowed">
                             {% csrf_token %}
-        
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="username">Usuario</label>
-                                        <input class="form-control" type="text" name='username'>
-                                    </div>
+
+                            <div class="field">
+                                <label class="label">Usuario</label>
+                                <div class="control">
+                                  <input class="input is-rounded" type="text" placeholder="Usuario" name='username'>
                                 </div>
                             </div>
-        
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="username">Contraseña</label>
-                                        <input class="form-control" type="password" name='password'>
-                                    </div>
+
+                            <div class="field">
+                                <label class="label">Contraseña</label>
+                                <div class="control">
+                                  <input class="input is-rounded" type="password" name='password' placeholder="Contraseña">
                                 </div>
                             </div>
-        
-                            <div class="row justify-content-sm-center">
-                                <div class="col-sm-auto">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Entrar</button>
-                                    </div>
-                                </div>
+
+                            <div class="field is-grouped is-grouped-centered">
+                                <p class="control">
+                                  <button class="button is-info is-medium"> Entrar </button>
+                                </p>
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 {% endblock content %}
-
 
 {% block footerCopy %} Andrés Aguilar {% endblock footerCopy %}

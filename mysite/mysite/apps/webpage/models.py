@@ -32,6 +32,7 @@ class MyProjects(models.Model):
     class Meta:
         verbose_name = 'Project'
         verbose_name_plural = 'Projects'
+        ordering = ['-date']
 
     def __str__(self):
         return self.name

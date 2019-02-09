@@ -1,13 +1,24 @@
-{% extends 'base/base.html' %}
+{% extends 'base/layout.html' %}
 
 {% load staticfiles %}
 {% block title %} Dashboard {% endblock title %}
 
 {% block nav %} 
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Inicio</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'blog:index' %}">Blog</a></li>
-  <li class="nav-item"><a class="nav-link smooth-scroll" href="{% url 'logout' %}">Salir</a></li>
+    <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+    <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+    <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+    <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
 {% endblock nav %}
+
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> Panel de administración </h1>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
     <div class="page-content"> 

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block title %} {{ object.title }} {% endblock title %}
+{% block title %} {{ article.title }} {% endblock title %}
 
 {% block nav %}
     <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
@@ -15,18 +15,18 @@
     <div class="hero-body">
         <div class="level">
             <div class="level-item has-text-centered">
-                <h1 class="title has-text-centered"> {{ object.title }} </h1>
+                <h1 class="title has-text-centered"> {{ article.title }} </h1>
             </div>
         </div>
         <div class="level">
             <div class="level-item has-text-centered">
-                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> {{ object.pub_date }} </h2>
+                <h2 class="is-size-6 has-text-light has-text-weight-light is-uppercase"> {{ article.pub_date }} </h2>
             </div>
         </div>
         {% if request.user.is_authenticated %}
             <div class="level">
                 <div class="level-item has-text-centered">
-                        <a href="{% url 'dashboard:edit_post' object.slug %}"> Editar artículo </a>
+                        <a href="{% url 'dashboard:edit_post' article.slug %}"> Editar artículo </a>
                 </div>
             </div>
         {% endif %}
@@ -38,8 +38,8 @@
         <div class="columns is-centered mt-5">
             <div class="column is-four-fifths">
                 <div class="columns">
-                    <div class="column">
-                        {{ object.formatted_markdown|safe }}
+                    <div class="column has-text-justified">
+                        {{ article.formatted_markdown|safe }}
                     </div>
                 </div>
             </div>

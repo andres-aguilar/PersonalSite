@@ -1,13 +1,13 @@
 from django.conf.urls import url
 
-from .views import under_construction, index, error_404, Project, ProjectList
+from .views import UnderConstruction, Index, Project, ProjectList, Error404
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    #url(r'^$', UnderConstruction.as_view(), name='construction'),
+    url(r'^$', Index.as_view(), name='index'),
     url(r'^portafolio/$', ProjectList.as_view(), name='projects'),
     url(r'^portafolio/(?P<slug>[-\w]+)/$', Project.as_view(), name='project_details'),
-    #url(r'^$', under_construction, name='construction'),
-    #url(r'^error/$', error_404, name='error'),
+    #url(r'^error/$', Error404.as_view(), name='error'),
 ]
 
-handler404 = error_404
+handler404 = Error404

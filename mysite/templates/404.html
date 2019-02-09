@@ -1,32 +1,29 @@
-{% extends 'base/base.html' %}
+{% extends 'base/layout.html' %}
+{% load staticfiles %}
 
 {% block description %} {{ user.user.get_full_name }} {{ user.short_bio }} {% endblock description %}
-{% block keywords %} Not found, Python developer, Django developer, data engineer {% endblock keywords %}
-{% block title %} {{ user.user.get_full_name }} - Page not found {% endblock title %}
+{% block title %} Page not found {% endblock title %}
 
 {% block nav %} 
-  <li class="nav-item">
-    <a class="nav-link smooth-scroll" href="{% url 'website:index' %}">Regresar al inicio</a>
-  </li>
+  <a href="{% url 'website:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Acerca de mí </a>
+  <a href="{% url 'website:projects' %}" class="navbar-item has-text-weight-light is-uppercase"> Portafolio </a>
+  <a href="{% url 'website:index' %}#contacto" class="navbar-item has-text-weight-light is-uppercase"> Contacto </a>
+  <a href="{% url 'blog:index' %}" class="navbar-item has-text-weight-light is-uppercase"> Blog </a>
 {% endblock nav %}
 
-{% block content %} 
-<div class="page-content"> 
-    <div>
-        <section class="profile-page">
-          <div class="wrapper">
-            <div class="page-header page-header-small">
-              <div class="container">
-                <div class="content-center">
-                  <h1> This is not the web page you are looking for! </h1>
-                  <a class='btn btn-primary' href="{% url 'website:index' %}"> Regresar al inicio </a>
-                </div>
-              </div>
+{% block header %}
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-item has-text-centered">
+                <h1 class="title has-text-centered"> This is not the web page you are looking for! </h1>
             </div>
-          </div>
-        </section>
+        </div>
+        <div class="level">
+            <div class="level-item has-text-centered">
+              <a class='button' href="{% url 'website:index' %}"> Regresar al inicio </a>
+            </div>
+        </div>
     </div>
-</div>
-{% endblock content %}
+{% endblock %}
 
 {% block footerCopy %} {{ user.user.get_full_name }} {% endblock footerCopy %}

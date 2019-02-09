@@ -10,6 +10,7 @@ from .models import Article
 
 class ArticleList(ListView):
     model = Article
+    context_object_name = 'article_list'
     template_name = 'blog/list_articles.html'
     paginate_by = 10
 
@@ -22,6 +23,7 @@ class ArticleList(ListView):
 
 class ArticleDetail(DetailView):
     model = Article
+    context_object_name = 'article'
     template_name = 'blog/article_view.html'
 
     def get_context_data(self, **kwargs):
